@@ -103,25 +103,29 @@ h2 em,h1 em{font-style:italic;font-weight:500;color:var(--blush)}
 body.lock{overflow:hidden}
 
 /* hero */
-.hero{position:relative;display:flex;flex-direction:column;color:var(--cream);background:var(--ink);overflow:hidden;isolation:isolate}
-.hero-media{position:relative;z-index:-1;margin:0;width:100%;aspect-ratio:591/860;max-height:80svh;background:var(--ink-2)}
-.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0;transition:opacity .9s ease}
-.hero-media img.on{opacity:1}
-.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,15,.55) 0,rgba(21,16,15,0) 20%,rgba(21,16,15,0) 62%,rgba(21,16,15,.75) 84%,var(--ink) 100%)}
-.hero-media figcaption{position:absolute;z-index:1;right:var(--gut);top:84px;font-size:12px;font-weight:600;color:var(--cream);text-shadow:0 1px 8px rgba(0,0,0,.5)}
-.hero-media figcaption span+span{margin-left:8px;color:#cbbcb6;font-weight:500}
-.hero-in{position:relative;margin-top:-84px;padding-bottom:0}
-.live{display:inline-flex;align-items:center;gap:9px;padding:7px 13px 7px 11px;border:1px solid rgba(247,241,236,.25);border-radius:999px;background:rgba(21,16,15,.45);font-size:12px;font-weight:600;color:var(--cream)}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:var(--cream);background:var(--ink);overflow:hidden;isolation:isolate}
+.slides{position:absolute;inset:0;z-index:-2;margin:0}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+.slide.on{opacity:1}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.slide .bg{display:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(21,16,15,.5) 0,rgba(21,16,15,0) 18%,rgba(21,16,15,0) 42%,rgba(21,16,15,.78) 70%,rgba(21,16,15,.94) 100%)}
+.slides figcaption{position:absolute;z-index:1;right:var(--gut);top:84px;font-size:12px;color:#e9dfda;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.hero-in{position:relative;padding-top:120px;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+.hero-copy{max-width:560px}
+.hero h1{font-size:clamp(40px,11vw,66px);line-height:1;letter-spacing:-.015em;margin-bottom:18px;text-shadow:0 2px 30px rgba(0,0,0,.3)}
+.hero p{font-size:15.5px;line-height:1.55;color:#e6dcd7;margin-bottom:22px;text-shadow:0 1px 16px rgba(0,0,0,.4)}
+.hero .ctas{display:flex;gap:10px}
+.hero .ctas .btn{flex:1 1 0;min-height:48px;padding:0 14px;font-size:14px}
+.hero .ctas .btn svg{width:17px;height:17px}
+.hero .long{display:none}
+.hero-info{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:20px;font-size:13.5px;color:#d8ccc7}
+.hero-info a{text-decoration:none;border-bottom:1px solid rgba(247,241,236,.35)}
+.hero-info a:hover{color:var(--cream);border-color:var(--cream)}
+.hero-info .ig{display:none}
+.live{display:inline-flex;align-items:center;gap:8px;color:var(--cream)}
 .live i{width:7px;height:7px;border-radius:50%;background:#9a8a86}
 .live.on i{background:#48c27a}
-.hero h1{font-size:clamp(60px,16vw,150px);line-height:.9;letter-spacing:-.02em;margin:18px 0 20px}
-.hero h1 em{padding-right:.04em}
-.hero p{font-size:17px;color:#ddd1cc;max-width:440px;margin-bottom:28px}
-.hero .ctas{display:flex;flex-direction:column;gap:12px}
-.hero-foot{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin-top:36px;padding:20px 0 calc(22px + env(safe-area-inset-bottom));border-top:1px solid rgba(247,241,236,.16);font-size:12px;color:#cbbcb6}
-.hero-foot b{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--blush);font-weight:700;margin-bottom:3px}
-.hero-foot a{text-decoration:none}
-.hero-foot a:hover{color:var(--cream)}
 
 /* sections */
 section{padding:88px 0}
@@ -234,8 +238,11 @@ footer{background:var(--ink);color:var(--mute-dk);padding:72px 0 calc(40px + env
 @media (min-width:640px){
   :root{--gut:32px}
   .hero .ctas{flex-direction:row}
-  .hero-bg{grid-template-columns:repeat(3,1fr)}
-  .hero-foot{grid-template-columns:repeat(3,auto);justify-content:start;column-gap:48px}
+  .hero .ctas .btn{flex:0 0 auto;min-height:52px;padding:0 26px;font-size:15px}
+  .hero p{font-size:16.5px;margin-bottom:26px}
+  .hero-info .ig{display:inline}
+  .hero .long{display:inline}
+  .hero .short{display:none}
   .look{columns:3;column-gap:14px}
   .look button{margin-bottom:14px}
   .row{grid-template-columns:1fr 1fr}
@@ -256,14 +263,14 @@ footer{background:var(--ink);color:var(--mute-dk);padding:72px 0 calc(40px + env
   .hdr .wrap{height:84px}
   .logo .lm{width:30px;height:35px}
   .logo .lw{width:106px;height:24px}
-  .hero{min-height:100vh;min-height:100svh;justify-content:center}
-  .hero-media{position:absolute;inset:0 0 0 auto;width:min(46vw,calc(100svh*.66));aspect-ratio:auto;max-height:none}
-  .hero-in{margin-top:0;padding-top:84px}
-  .hero-media::after{background:linear-gradient(90deg,var(--ink) 0,rgba(21,16,15,0) 16%),linear-gradient(180deg,rgba(21,16,15,.5) 0,rgba(21,16,15,0) 22%)}
-  .hero-media figcaption{top:auto;bottom:30px;right:30px}
-  .hero-copy{max-width:min(640px,calc(100vw - min(46vw,100svh*.66) - var(--gut) - 48px));padding-top:40px}
-  .hero h1{font-size:clamp(84px,8.2vw,136px)}
-  .hero-foot{margin-top:48px;padding-bottom:0;border-top-color:rgba(247,241,236,.14)}
+  .hero{align-items:center}
+  .slide .bg{display:block;filter:blur(30px) brightness(.62) saturate(1.1);transform:scale(1.15)}
+  .slide .fg{left:auto;width:auto;height:100%;max-width:none;object-fit:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
+  .hero::after{background:linear-gradient(90deg,rgba(21,16,15,.82) 0,rgba(21,16,15,.55) 38%,rgba(21,16,15,0) 62%),linear-gradient(180deg,rgba(21,16,15,.45) 0,rgba(21,16,15,0) 20%,rgba(21,16,15,0) 80%,rgba(21,16,15,.5) 100%)}
+  .slides figcaption{top:auto;bottom:28px;right:var(--gut)}
+  .hero-in{padding-top:84px;padding-bottom:0}
+  .hero h1{font-size:clamp(64px,6vw,92px)}
+  .hero p{font-size:18px;max-width:30em}
   .about{grid-template-columns:1fr 1fr;gap:88px;align-items:center}
   .about-media{order:-1}
   .svc-grid{grid-template-columns:repeat(4,1fr);grid-template-rows:380px 380px;grid-template-areas:"lash lash braid pony" "curl nail braid pony"}
@@ -318,28 +325,23 @@ footer{background:var(--ink);color:var(--mute-dk);padding:72px 0 calc(40px + env
 
 <main>
 <section class="hero" id="top" aria-label="Welcome" style="padding:0">
-  <figure class="hero-media" aria-label="Recent work">
-    <img class="on" src="/img/hero-1.webp" width="591" height="810" alt="Client with honey-blonde curly braids and a stitched front" data-name="Honey curls" fetchpriority="high" decoding="async">
-    <img src="/img/hero-2.webp" width="591" height="870" alt="Fulani braids with curly ends" data-name="Fulani braids" loading="lazy" decoding="async">
-    <img src="/img/hero-3.webp" width="591" height="895" alt="Long straight knotless braids" data-name="Knotless braids" loading="lazy" decoding="async">
-    <img src="/img/hero-4.webp" width="591" height="900" alt="Side view of stitch cornrows" data-name="Stitch cornrows" loading="lazy" decoding="async">
-    <img src="/img/hero-5.webp" width="591" height="915" alt="Boho braids with loose curls" data-name="Boho braids" loading="lazy" decoding="async">
-    <figcaption><span id="heroCap">Honey curls</span><span><span id="heroNum">1</span> / 5</span></figcaption>
+  <figure class="slides" aria-label="Recent work">
+    <div class="slide on" data-name="Honey curls"><img class="bg" src="/img/hero-1.webp" alt="" fetchpriority="high" decoding="async"><img class="fg" src="/img/hero-1.webp" width="591" height="810" alt="Client with honey-blonde curly braids and a stitched front" fetchpriority="high" decoding="async"></div>
+    <div class="slide" data-name="Fulani braids"><img class="bg" src="/img/hero-2.webp" alt="" loading="lazy" decoding="async"><img class="fg" src="/img/hero-2.webp" width="591" height="870" alt="Fulani braids with curly ends" loading="lazy" decoding="async"></div>
+    <div class="slide" data-name="Knotless braids"><img class="bg" src="/img/hero-3.webp" alt="" loading="lazy" decoding="async"><img class="fg" src="/img/hero-3.webp" width="591" height="895" alt="Long straight knotless braids" loading="lazy" decoding="async"></div>
+    <div class="slide" data-name="Stitch cornrows"><img class="bg" src="/img/hero-4.webp" alt="" loading="lazy" decoding="async"><img class="fg" src="/img/hero-4.webp" width="591" height="900" alt="Side view of stitch cornrows" loading="lazy" decoding="async"></div>
+    <div class="slide" data-name="Boho braids"><img class="bg" src="/img/hero-5.webp" alt="" loading="lazy" decoding="async"><img class="fg" src="/img/hero-5.webp" width="591" height="915" alt="Boho braids with loose curls" loading="lazy" decoding="async"></div>
+    <figcaption id="heroCap">Honey curls</figcaption>
   </figure>
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <span class="live" id="live"><i></i><span>Mon–Sat 9–8 · Sun 1–8</span></span>
-      <h1>Crowned<br>&amp; <em>glowing.</em></h1>
-      <p>Braids, lashes, brows, nails, tattoos and piercings under one roof at American House, East Legon. Come as you are, leave with the look.</p>
+      <h1>Hair, lashes &amp; nails, done with <em>love.</em></h1>
+      <p><span class="long">We're G'Lash and Braidhaus, two studios sharing one cosy space at American House, East Legon, right opposite Compu Ghana. Send us a picture of the look you want and we'll take it from there.</span><span class="short">Two studios, one cosy space at American House, East Legon. Send us a picture of the look you want.</span></p>
       <div class="ctas">
         <a class="btn btn-blush" href="#book"><svg><use href="#wa"/></svg>Book on WhatsApp</a>
-        <a class="btn btn-ghost" href="#lookbook">View the lookbook</a>
+        <a class="btn btn-ghost" href="#lookbook">See our work</a>
       </div>
-      <div class="hero-foot">
-        <span><b>Hours</b>Mon–Sat 9–8 · Sun 1–8</span>
-        <span><b>Find us</b>Opp. Compu Ghana</span>
-        <a href="https://www.instagram.com/glash233/" target="_blank" rel="noopener"><b>Instagram</b>1.1k followers ↗</a>
-      </div>
+      <p class="hero-info"><span class="live" id="live"><i></i><span>Mon–Sat 9am–8pm, Sun 1pm–8pm</span></span><a href="tel:+233548222377">054 822 2377</a><a class="ig" href="https://www.instagram.com/glash233/" target="_blank" rel="noopener">@glash233</a></p>
     </div>
   </div>
 </section>
@@ -518,7 +520,7 @@ footer{background:var(--ink);color:var(--mute-dk);padding:72px 0 calc(40px + env
   onScroll();addEventListener('scroll',onScroll,{passive:true});
 
   // hero slideshow: one photo at a time
-  var hero=$('.hero'),slides=document.querySelectorAll('.hero-media img'),cap=$('#heroCap'),num=$('#heroNum'),cur=0;
+  var hero=$('.hero'),slides=document.querySelectorAll('.slide'),cap=$('#heroCap'),cur=0;
   if(slides.length>1&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     setInterval(function(){
       if(document.hidden||scrollY>innerHeight)return;
@@ -526,7 +528,6 @@ footer{background:var(--ink);color:var(--mute-dk);padding:72px 0 calc(40px + env
       cur=(cur+1)%slides.length;
       slides[cur].classList.add('on');
       cap.textContent=slides[cur].getAttribute('data-name');
-      num.textContent=cur+1;
     },5000);
   }
 
@@ -559,7 +560,7 @@ footer{background:var(--ink);color:var(--mute-dk);padding:72px 0 calc(40px + env
   var row=$('#hours tr[data-d="'+d+'"]');if(row)row.className='today';
   var st=$('#status');st.classList.toggle('on',open);
   var live=$('#live');live.classList.toggle('on',open);
-  live.lastElementChild.textContent=open?'Open now · until 8pm':(h<(d===0?13:9)?'Opens today at '+(d===0?'1pm':'9am'):'Closed now · WhatsApp us anytime');
+  live.lastElementChild.textContent=open?'Open now, till 8pm':(h<(d===0?13:9)?'Opening at '+(d===0?'1pm':'9am')+' today':'Closed now, but you can still WhatsApp us');
   st.lastElementChild.textContent=open?'Open now':'Closed now · WhatsApp us anytime';
   $('#yr').textContent=now.getUTCFullYear();
 
