@@ -1,5 +1,17 @@
 # G'Lash × Braidhaus
 
-Website for G'Lash (lash studio) and Braidhaus (braids), American House, East Legon, Accra.
+Site for G'Lash and Braidhaus, American House, East Legon, Accra.
 
-Static site with no build step: `index.html`, photos in `img/` (WebP, cropped from the studios' Instagram posts), icons, `site.webmanifest` and `og.jpg` for social previews. Deployed on Vercel; `vercel.json` sets caching and security headers.
+Plain HTML/CSS/JS, no build step.
+
+```
+index.html        page
+css/site.css      styles (mobile first)
+js/site.js        menu, hero slideshow, opening hours, WhatsApp booking form
+assets/logo.svg   logo sprite (#mark, #wordmark)
+img/              photos (WebP)
+```
+
+Run locally with any static server, e.g. `npx serve .` or `python3 -m http.server`.
+
+Deployed on Vercel. Headers and caching are in `vercel.json`.

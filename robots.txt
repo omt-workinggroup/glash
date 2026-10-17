@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://glash.vercel.app/sitemap.xml
